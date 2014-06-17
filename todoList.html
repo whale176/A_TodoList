@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script>
+<script src="http://jashkenas.github.com/coffee-script/extras/coffee-script.js"></script>
+<script type="text/javascript" src="js/controllers.js"></script>
+<meta charset=utf-8 />
+<title>Welcome to JS Bin</title>
+<meta charset=utf-8>
+</head>
+  
+<body>
+  
+  <h1>Hello World</h1>  
+    <p>AngularJs say hello to {{yourName || 'everyone'}}!</p>  
+      <label>輸入你的姓名，Angular會跟你打招呼</label>  
+      <input type="text" ng-model="yourName">  
+  <p>
+  數量: <input type="number" ng-model="quantity" ng-init="quantity = 1">
+  <br>
+  單價: <input type="number" ng-model="price" ng-init="price = 299">
+  <br>
+  總價: {{ quantity * price }} 
+    
+    <hr>
+    <div ng-controller="TodoCtrl">
+      <h1>Todo List</h1>  
+        <form ng-submit="addItem()">  
+          <input type="text" name="newItem" ng-model="newItem"/>  
+          <input type="submit" id="submit" value="新增" />  
+        </form>  
+      <ul id="todo">
+        <li ng-repeat="item in todoList | filter:{isFinish:false}">
+          <div ng-hide="item.editing">
+          	<input type="checkbox" ng-click="removeItem(item)">
+          	<span ng-dblclick="edit(item)">{{item.label }}</span>
+          </div>
+          <div ng-show="item.editing">
+          	<input type="text" value="{{item.label }}" ng-model="item.label">
+          	<button ng-click="save(item)">儲存</button>
+          </div>
+        </li>
+      </ul>
+ 
+      <hr>
+ 
+      <h1>Finished List</h1>  
+      <ul id="finish">
+        <li ng-repeat="item in todoList | filter:{isFinish:true}">
+          {{item.label}}
+        </li>
+      </ul>
+    </div>
+</body>
+</html>
